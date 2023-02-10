@@ -626,10 +626,9 @@ class StickerFormatType(Enum):
             StickerFormatType.png: "png",
             StickerFormatType.apng: "png",
             StickerFormatType.lottie: "json",
-            StickerFormatType.gif: "gif",
+            StickerFormatType.gif: "gif"
         }
-        # TODO: Improve handling of unknown sticker format types if possible
-        return lookup.get(self, "png")
+        return lookup.get(self)
 
 
 class InviteTarget(Enum):
