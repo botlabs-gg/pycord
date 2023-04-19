@@ -610,6 +610,20 @@ class Permissions(BaseFlags):
         """
         return 1 << 40
 
+    @flag_value
+    def view_creator_monetization_analytics(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can view creator monetization analytics.
+
+        .. versionadded:: 2.4"""
+        return 1 << 41
+
+    @flag_value
+    def use_soundboard(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can use soundboard.
+
+        .. versionadded:: 2.4"""
+        return 1 << 42
+
 
 PO = TypeVar("PO", bound="PermissionOverwrite")
 
@@ -727,6 +741,8 @@ class PermissionOverwrite:
         use_external_stickers: bool | None
         start_embedded_activities: bool | None
         moderate_members: bool | None
+        view_creator_monetization_analytics: bool | None
+        use_soundboard: bool | None
 
     def __init__(self, **kwargs: bool | None):
         self._values: dict[str, bool | None] = {}
