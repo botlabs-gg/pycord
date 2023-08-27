@@ -73,6 +73,8 @@ These changes are available on the `master` branch, but have not yet been releas
   ([#1931](https://github.com/Pycord-Development/pycord/pull/1931))
 
 ### Fixed
+- Added support for custom bot status.
+  ([#2206](https://github.com/Pycord-Development/pycord/pull/2206))
 
 - Fixed the type-hinting of `SlashCommandGroup.walk_commands()` to reflect actual
   behavior. ([#1838](https://github.com/Pycord-Development/pycord/pull/1838))
@@ -158,7 +160,6 @@ These changes are available on the `master` branch, but have not yet been releas
 ## [2.3.0] - 2022-11-23
 
 ### Added
-
 - New brief Attribute to BridgeSlashCommand.
   ([#1676](https://github.com/Pycord-Development/pycord/pull/1676))
 - Python 3.11 support. ([#1680](https://github.com/Pycord-Development/pycord/pull/1680))
