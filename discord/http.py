@@ -293,7 +293,6 @@ class HTTPClient:
 
                         # check if we have rate limit header information
                         remaining = response.headers.get("X-Ratelimit-Remaining")
-                        print(f"RatelimitReached: status: {response.status}, url: {url}, method: {method}")
                         if remaining == "0" and response.status != 429:
                             print(f"RatelimitReached: status: {response.status}, url: {url}, method: {method}")
                             # we've depleted our current bucket
