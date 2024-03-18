@@ -294,7 +294,9 @@ class HTTPClient:
                         # check if we have rate limit header information
                         remaining = response.headers.get("X-Ratelimit-Remaining")
                         if remaining == "0" and response.status != 429:
-                            print(f"RatelimitReached: status: {response.status}, url: {url}, method: {method}")
+                            if response.status != 200 or response.status != 204:
+                              print(f"RatelimitReached: status: {response.status}, url: {url}, method: {method}")
+                            
                             # we've depleted our current bucket
                             delta = utils._parse_ratelimit_header(
                                 response, use_clock=self.use_clock
@@ -314,7 +316,7 @@ class HTTPClient:
 
                         # we are being rate limited
                         if response.status == 429:
-                            print(f"APIError: status: {response.status}, url: {url}, method: {method}")
+                            print(f"APIRatelimitError: status: {response.status}, url: {url}, method: {method}")
                             if not response.headers.get("Via") or isinstance(data, str):
                                 # Banned by Cloudflare more than likely.
                                 raise HTTPException(response, data)
@@ -328,6 +330,7 @@ class HTTPClient:
                             # check if it's a global rate limit
                             is_global = data.get("global", False)
                             if is_global:
+                                print(f"GlobalRateLimitReached: status: {response.status}, url: {url}, method: {method}")
                                 _log.warning(
                                     "Global rate limit has been hit. Retrying in %.2f seconds.",
                                     retry_after,
@@ -351,7 +354,7 @@ class HTTPClient:
                             continue
 
                         # the usual error cases
-                        print(f"APIError: status: {response.status}, url: {url}")
+                        print(f"APIError: status: {response.status}, url: {url}, method: {method}")
                         if response.status == 403:
                             raise Forbidden(response, data)
                         elif response.status == 404:
