@@ -623,12 +623,36 @@ class Permissions(BaseFlags):
         return 1 << 42
 
     @flag_value
+    def create_guild_expressions(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can create emoji, stickers, and soundboard sounds.
+        .. versionadded:: 2.4"""
+        return 1 << 43
+
+    @flag_value
+    def create_events(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can create and edit events.
+        .. versionadded:: 2.4"""
+        return 1 << 44
+
+    @flag_value
+    def use_external_sounds(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can use custom soundboard sounds.
+        .. versionadded:: 2.4"""
+        return 1 << 45
+
+    @flag_value
     def send_voice_messages(self) -> int:
         """:class:`bool`: Returns ``True`` if a member can send voice messages.
 
         .. versionadded:: 2.5
         """
         return 1 << 46
+
+    @flag_value
+    def send_polls(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can send polls.
+        .. versionadded:: 2.4"""
+        return 1 << 49
 
 
 PO = TypeVar("PO", bound="PermissionOverwrite")
@@ -750,6 +774,10 @@ class PermissionOverwrite:
         send_voice_messages: bool | None
         view_creator_monetization_analytics: bool | None
         use_soundboard: bool | None
+        create_guild_expressions: bool | None
+        create_events: bool | None
+        use_external_sounds: bool | None
+        send_polls: bool | None
 
     def __init__(self, **kwargs: bool | None):
         self._values: dict[str, bool | None] = {}
