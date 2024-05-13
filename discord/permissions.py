@@ -611,6 +611,18 @@ class Permissions(BaseFlags):
         return 1 << 40
 
     @flag_value
+    def view_creator_monetization_analytics(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can view creator monetization analytics.
+        .. versionadded:: 2.4"""
+        return 1 << 41
+
+    @flag_value
+    def use_soundboard(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can use soundboard.
+        .. versionadded:: 2.4"""
+        return 1 << 42
+
+    @flag_value
     def send_voice_messages(self) -> int:
         """:class:`bool`: Returns ``True`` if a member can send voice messages.
 
@@ -736,6 +748,8 @@ class PermissionOverwrite:
         start_embedded_activities: bool | None
         moderate_members: bool | None
         send_voice_messages: bool | None
+        view_creator_monetization_analytics: bool | None
+        use_soundboard: bool | None
 
     def __init__(self, **kwargs: bool | None):
         self._values: dict[str, bool | None] = {}
