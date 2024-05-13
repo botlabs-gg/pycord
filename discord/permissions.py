@@ -191,7 +191,6 @@ class Permissions(BaseFlags):
         - :attr:`manage_emojis`
         - :attr:`view_audit_log`
         - :attr:`view_guild_insights`
-        - :attr:`view_creator_monetization_analytics`
         - :attr:`manage_guild`
         - :attr:`change_nickname`
         - :attr:`manage_nicknames`
@@ -812,6 +811,7 @@ class PermissionOverwrite:
         send_polls: bool | None
         use_external_apps: bool | None
         pin_messages: bool | None
+        view_creator_monetization_analytics: bool | None
 
     def __init__(self, **kwargs: bool | None):
         self._values: dict[str, bool | None] = {}
