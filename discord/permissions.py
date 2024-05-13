@@ -373,6 +373,13 @@ class Permissions(BaseFlags):
         """:class:`bool`: Returns ``True`` if a user can view all or specific channels."""
         return 1 << 10
 
+    @make_permission_alias("view_channel")
+    def read_messages(self) -> int:
+        """:class:`bool`: An alias for :attr:`view_channel`.
+        .. versionadded:: 1.3
+        """
+        return 1 << 10
+
     @flag_value
     def send_messages(self) -> int:
         """:class:`bool`: Returns ``True`` if a user can send messages from all or specific text channels."""
@@ -416,6 +423,13 @@ class Permissions(BaseFlags):
     @flag_value
     def use_external_emojis(self) -> int:
         """:class:`bool`: Returns ``True`` if a user can use emojis from other guilds."""
+        return 1 << 18
+
+    @make_permission_alias("use_external_emojis")
+    def external_emojis(self) -> int:
+        """:class:`bool`: An alias for :attr:`use_external_emojis`.
+        .. versionadded:: 1.3
+        """
         return 1 << 18
 
     @flag_value
@@ -564,6 +578,13 @@ class Permissions(BaseFlags):
         """
         return 1 << 37
 
+    @make_permission_alias("use_external_stickers")
+    def external_stickers(self) -> int:
+        """:class:`bool`: An alias for :attr:`use_external_stickers`.
+        .. versionadded:: 2.0
+        """
+        return 1 << 37
+
 
     @flag_value
     def send_messages_in_threads(self) -> int:
@@ -577,6 +598,13 @@ class Permissions(BaseFlags):
     def use_embedded_activities(self) -> int:
         """:class:`bool`: Returns ``True`` if a user can launch an activity flagged 'EMBEDDED' in a voice channel.
 
+        .. versionadded:: 2.0
+        """
+        return 1 << 39
+
+    @make_permission_alias("use_embedded_activities")
+    def start_embedded_activities(self) -> int:
+        """:class:`bool`: An alias for :attr:`use_embedded_activities`.
         .. versionadded:: 2.0
         """
         return 1 << 39
@@ -755,6 +783,7 @@ class PermissionOverwrite:
         view_audit_log: bool | None
         priority_speaker: bool | None
         stream: bool | None
+        read_messages: bool | None
         view_channel: bool | None
         send_messages: bool | None
         send_tts_messages: bool | None
@@ -763,6 +792,7 @@ class PermissionOverwrite:
         attach_files: bool | None
         read_message_history: bool | None
         mention_everyone: bool | None
+        external_emojis: bool | None
         use_external_emojis: bool | None
         view_guild_insights: bool | None
         connect: bool | None
@@ -786,7 +816,9 @@ class PermissionOverwrite:
         create_private_threads: bool | None
         send_messages_in_threads: bool | None
         use_external_stickers: bool | None
+        external_stickers: bool | None
         use_embedded_activities: bool | None
+        start_embedded_activities: bool | None
         moderate_members: bool | None
         use_soundboard: bool | None
         use_external_sounds: bool | None
