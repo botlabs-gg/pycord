@@ -124,9 +124,9 @@ class Route:
 
     @property
     def base(self) -> str:
-        DISCORD_PROXY = bool(os.environ.get("DISCORD_PROXY", False))
+        DISCORD_PROXY = os.environ.get("DISCORD_PROXY", "")
         if DISCORD_PROXY:
-            return f"http://discord.com/api/v{API_VERSION}"
+            return f"http://{DISCORD_PROXY}/api/v{API_VERSION}"
         return f"https://discord.com/api/v{API_VERSION}"
 
     @property
