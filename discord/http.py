@@ -299,7 +299,12 @@ class HTTPClient:
                         if remaining == "0" and response.status != 429:
                             # we've depleted our current bucket
                             if response.status != 200 or response.status != 204:
-                                print(f"RatelimitReached: status: {response.status}, url: {url}, method: {method}")
+                                print(f"RatelimitReached: status: {response.status}, url: {url}, method: {method}, "
+                                      f"x-ratelimit-bucket: {response.headers.get('x-ratelimit-bucket')},"
+                                      f"x-ratelimit-limit: {response.headers.get('x-ratelimit-limit')}, "
+                                      f"x-ratelimit-remaining: {response.headers.get('x-ratelimit-remaining')}, "
+                                      f"x-ratelimit-reset: {response.headers.get('x-ratelimit-reset')}, "
+                                      f"x-ratelimit-reset-after: {response.headers.get('x-ratelimit-reset-after')}")
                             delta = utils._parse_ratelimit_header(
                                 response, use_clock=self.use_clock
                             )
@@ -321,7 +326,13 @@ class HTTPClient:
 
                         # we are being rate limited
                         if response.status == 429:
-                            print(f"APIRatelimitError: status: {response.status}, url: {url}, method: {method}")
+                            print(f"APIRatelimitError: status: {response.status}, url: {url}, method: {method}, "
+                                  f"x-ratelimit-bucket: {response.headers.get('x-ratelimit-bucket')}, "
+                                  f"x-ratelimit-limit: {response.headers.get('x-ratelimit-limit')},"
+                                  f"x-ratelimit-remaining: {response.headers.get('x-ratelimit-remaining')},"
+                                  f"x-ratelimit-reset: {response.headers.get('x-ratelimit-reset')}, "
+                                  f"x-ratelimit-reset-after: {response.headers.get('x-ratelimit-reset-after')}, "
+                                  f"is_global_ratelimit: {data.get('global', False)}")
                             if not response.headers.get("Via") or isinstance(data, str):
                                 # Banned by Cloudflare more than likely.
                                 raise HTTPException(response, data)
@@ -365,7 +376,12 @@ class HTTPClient:
                             continue
 
                         # the usual error cases
-                        print(f"APIError: status: {response.status}, url: {url}, method: {method}")
+                        print(f"APIError: status: {response.status}, url: {url}, method: {method},"
+                              f"x-ratelimit-bucket: {response.headers.get('x-ratelimit-bucket')},"
+                              f"x-ratelimit-limit: {response.headers.get('x-ratelimit-limit')},"
+                              f"x-ratelimit-remaining: {response.headers.get('x-ratelimit-remaining')},"
+                              f"x-ratelimit-reset: {response.headers.get('x-ratelimit-reset')}, "
+                              f"x-ratelimit-reset-after: {response.headers.get('x-ratelimit-reset-after')}")
                         if response.status == 403:
                             raise Forbidden(response, data)
                         elif response.status == 404:
