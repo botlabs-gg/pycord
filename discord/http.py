@@ -304,6 +304,7 @@ class HTTPClient:
                                       f"x-ratelimit-limit: {response.headers.get('x-ratelimit-limit')}, "
                                       f"x-ratelimit-remaining: {response.headers.get('x-ratelimit-remaining')}, "
                                       f"x-ratelimit-reset: {response.headers.get('x-ratelimit-reset')}, "
+                                      f"CF-RAY: {response.headers.get('CF-RAY')}, "
                                       f"x-ratelimit-reset-after: {response.headers.get('x-ratelimit-reset-after')}")
                             delta = utils._parse_ratelimit_header(
                                 response, use_clock=self.use_clock
@@ -332,6 +333,7 @@ class HTTPClient:
                                   f"x-ratelimit-remaining: {response.headers.get('x-ratelimit-remaining')},"
                                   f"x-ratelimit-reset: {response.headers.get('x-ratelimit-reset')}, "
                                   f"x-ratelimit-reset-after: {response.headers.get('x-ratelimit-reset-after')}, "
+                                  f"CF-RAY: {response.headers.get('CF-RAY')}, "
                                   f"is_global_ratelimit: {data.get('global', False)}")
                             if not response.headers.get("Via") or isinstance(data, str):
                                 # Banned by Cloudflare more than likely.
@@ -381,6 +383,7 @@ class HTTPClient:
                               f"x-ratelimit-limit: {response.headers.get('x-ratelimit-limit')},"
                               f"x-ratelimit-remaining: {response.headers.get('x-ratelimit-remaining')},"
                               f"x-ratelimit-reset: {response.headers.get('x-ratelimit-reset')}, "
+                              f"CF-RAY: {response.headers.get('CF-RAY')}, "
                               f"x-ratelimit-reset-after: {response.headers.get('x-ratelimit-reset-after')}")
                         if response.status == 403:
                             raise Forbidden(response, data)
