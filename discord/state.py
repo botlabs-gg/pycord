@@ -665,6 +665,18 @@ class ConnectionState:
         event = AutoModActionExecutionEvent(self, data)
         self.dispatch("auto_moderation_action_execution", event)
 
+    def parse_entitlement_create(self, data) -> None:
+        # event = Entitlement(data=data, state=self)
+        self.dispatch("entitlement_create", data)
+
+    def parse_entitlement_update(self, data) -> None:
+        # event = Entitlement(data=data, state=self)
+        self.dispatch("entitlement_update", data)
+
+    def parse_entitlement_delete(self, data) -> None:
+        # event = Entitlement(data=data, state=self)
+        self.dispatch("entitlement_delete", data)
+
     def parse_message_create(self, data) -> None:
         channel, _ = self._get_guild_channel(data)
         # channel would be the correct type here
