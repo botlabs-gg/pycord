@@ -68,6 +68,7 @@ __all__ = (
     "AutoModKeywordPresetType",
     "ApplicationRoleConnectionMetadataType",
     "ReactionType",
+    "MessageReferenceType",
 )
 
 
@@ -257,6 +258,7 @@ class MessageType(Enum):
     stage_raise_hand = 30
     stage_topic = 31
     guild_application_premium_subscription = 32
+    poll_result = 46
 
 
 class VoiceRegion(Enum):
@@ -950,6 +952,16 @@ class ReactionType(Enum):
 
     normal = 0
     burst = 1
+
+
+
+class MessageReferenceType(Enum):
+    """The message reference's type"""
+
+    default = 0
+    forward = 1
+
+
 
 
 T = TypeVar("T")
