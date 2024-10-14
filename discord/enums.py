@@ -68,7 +68,6 @@ __all__ = (
     "AutoModKeywordPresetType",
     "ApplicationRoleConnectionMetadataType",
     "ReactionType",
-    "PollLayoutType",
     "MessageReferenceType",
 )
 
@@ -259,11 +258,6 @@ class MessageType(Enum):
     stage_raise_hand = 30
     stage_topic = 31
     guild_application_premium_subscription = 32
-    guild_incident_alert_mode_enabled = 36
-    guild_incident_alert_mode_disabled = 37
-    guild_incident_report_raid = 38
-    guild_incident_report_false_alarm = 39
-    purchase_notification = 44
     poll_result = 46
 
 
@@ -959,9 +953,6 @@ class ReactionType(Enum):
     normal = 0
     burst = 1
 
-class PollLayoutType(Enum):
-    """The poll's layout type."""
-    default = 1
 
 
 class MessageReferenceType(Enum):
