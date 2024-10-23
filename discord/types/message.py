@@ -91,8 +91,10 @@ class MessageApplication(TypedDict):
     icon: str | None
     name: str
 
+MessageReferenceType = Literal[0, 1]
 
 class MessageReference(TypedDict, total=False):
+    type: NotRequired[MessageReferenceType]
     message_id: Snowflake
     channel_id: Snowflake
     guild_id: Snowflake
@@ -102,7 +104,27 @@ class MessageReference(TypedDict, total=False):
 MessageType = Literal[
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 18, 19, 20, 21, 22, 23, 24
 ]
+class MessageCall(TypedDict):
+    participants: SnowflakeList
+    ended_timestamp: NotRequired[str]
 
+
+class ForwardedMessage(TypedDict):
+    type: MessageType
+    content: str
+    embeds: list[Embed]
+    attachments: list[Attachment]
+    timestamp: str
+    edited_timestamp: str | None
+    flags: NotRequired[int]
+    mentions: list[UserWithMember]
+    mention_roles: SnowflakeList
+    sticker_items: NotRequired[list[StickerItem]]
+    components: NotRequired[list[Component]]
+
+
+class MessageSnapshot(TypedDict):
+    message: ForwardedMessage
 
 class Message(TypedDict):
     guild_id: NotRequired[Snowflake]
@@ -135,6 +157,8 @@ class Message(TypedDict):
     embeds: list[Embed]
     pinned: bool
     type: MessageType
+    call: MessageCall
+    message_snapshots: NotRequired[list[MessageSnapshot]]
 
 
 AllowedMentionType = Literal["roles", "users", "everyone"]
