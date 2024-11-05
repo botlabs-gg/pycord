@@ -98,7 +98,6 @@ __all__ = (
     "DeletedReferencedMessage",
     "ForwardedMessage",
 )
-#continue from here
 
 def convert_emoji_reaction(emoji):
     if isinstance(emoji, Reaction):
