@@ -109,7 +109,6 @@ __all__ = (
     "ForwardedMessage",
 )
 
-
 def convert_emoji_reaction(emoji):
     if isinstance(emoji, Reaction):
         emoji = emoji.emoji
