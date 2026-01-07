@@ -722,16 +722,15 @@ class ConnectionState:
         self.dispatch("auto_moderation_action_execution", event)
 
     def parse_entitlement_create(self, data) -> None:
-        event = Entitlement(data=data, state=self)
-        self.dispatch("entitlement_create", event)
+        self.dispatch("entitlement_create", data)
 
     def parse_entitlement_update(self, data) -> None:
-        event = Entitlement(data=data, state=self)
-        self.dispatch("entitlement_update", event)
+        # event = Entitlement(data=data, state=self)
+        self.dispatch("entitlement_update", data)
 
     def parse_entitlement_delete(self, data) -> None:
-        event = Entitlement(data=data, state=self)
-        self.dispatch("entitlement_delete", event)
+        # event = Entitlement(data=data, state=self)
+        self.dispatch("entitlement_delete", data)
 
     def parse_subscription_create(self, data) -> None:
         event = Subscription(data=data, state=self)
