@@ -1028,6 +1028,19 @@ class ReactionType(Enum):
     normal = 0
     burst = 1
 
+class PollLayoutType(Enum):
+    """The poll's layout type."""
+    default = 1
+
+
+class MessageReferenceType(Enum):
+    """The message reference's type"""
+
+    default = 0
+    forward = 1
+
+
+
 
 class SKUType(Enum):
     """The SKU type"""
