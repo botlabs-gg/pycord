@@ -629,11 +629,21 @@ class Permissions(BaseFlags):
         return 1 << 42
 
     @flag_value
-    def use_external_sounds(self) -> int:
-        """:class:`bool`: Returns ``True`` if a user can use external soundboard sounds in a voice channel.
+    def create_guild_expressions(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can create emoji, stickers, and soundboard sounds.
+        .. versionadded:: 2.4"""
+        return 1 << 43
 
-        .. versionadded:: 2.7
-        """
+    @flag_value
+    def create_events(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can create and edit events.
+        .. versionadded:: 2.4"""
+        return 1 << 44
+
+    @flag_value
+    def use_external_sounds(self) -> int:
+        """:class:`bool`: Returns ``True`` if a user can use custom soundboard sounds.
+        .. versionadded:: 2.4"""
         return 1 << 45
 
     @flag_value
@@ -812,6 +822,8 @@ class PermissionOverwrite:
         use_external_apps: bool | None
         pin_messages: bool | None
         view_creator_monetization_analytics: bool | None
+        create_guild_expressions: bool | None
+        create_events: bool | None
 
     def __init__(self, **kwargs: bool | None):
         self._values: dict[str, bool | None] = {}
