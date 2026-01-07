@@ -41,6 +41,7 @@ from typing import (
 from urllib.parse import quote as _uriquote
 
 import aiohttp
+import os
 
 from . import __version__, utils
 from .errors import (
@@ -139,7 +140,10 @@ class Route:
 
     @property
     def base(self) -> str:
-        return self.API_BASE_URL.format(API_VERSION=API_VERSION)
+        DISCORD_PROXY = bool(os.environ.get("DISCORD_PROXY", False))
+        if DISCORD_PROXY:
+            return f"http://discord.com/api/v{API_VERSION}"
+        return f"https://discord.com/api/v{API_VERSION}"
 
     @property
     def bucket(self) -> str:
